@@ -46,21 +46,139 @@ app.get('/proxy', async (req, res) => {
         // If no URL is provided, display an error message with the input form
         // This HTML remains embedded for simplicity of error handling within the proxy logic.
         return res.status(400).send(`
-            <div style="font-family: 'Inter', sans-serif; text-align: center; margin-top: 50px; background-color: #f7fafc; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <h1 style="color: #4a5568;">BlipNet Proxy</h1>
-                <p style="color: #718096;">Please provide a URL to proxy.</p>
-                <form action="/proxy" method="GET" style="margin-top: 20px;">
-                    <input type="text" name="url" placeholder="Enter URL (e.g., https://example.com)"
-                           style="width: 80%; max-width: 500px; padding: 10px; border: 1px solid #cbd5e0; border-radius: 5px; margin-right: 10px;">
-                    <button type="submit"
-                            style="padding: 10px 20px; background-color: #4299e1; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease;">
-                        Go
-                    </button>
-                </form>
-                <p style="color: #e53e3e; margin-top: 20px;">
-                    <strong>Disclaimer:</strong> This is a basic proxy. It may not work for all websites, especially those with complex JavaScript or dynamic content. It does not provide anonymity or security features beyond basic content fetching. Use at your own risk.
-                </p>
-            </div>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>BlipNet Proxy - Error</title>
+                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+                <script src="https://cdn.tailwindcss.com"></script>
+                <style>
+                    body {
+                        font-family: 'Inter', sans-serif;
+                        background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        min-height: 100vh;
+                        margin: 0;
+                        padding: 1rem;
+                        box-sizing: border-box;
+                    }
+                    .container {
+                        background-color: #ffffff;
+                        padding: 3rem 2.5rem;
+                        border-radius: 1.5rem;
+                        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+                        text-align: center;
+                        max-width: 90%;
+                        width: 550px;
+                        border: 1px solid #e2e8f0;
+                        animation: fadeIn 0.8s ease-out;
+                    }
+                    @keyframes fadeIn {
+                        from { opacity: 0; transform: translateY(-20px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                    .input-field {
+                        flex-grow: 1;
+                        padding: 0.85rem 1.25rem;
+                        border: 1px solid #cbd5e0;
+                        border-radius: 0.75rem;
+                        margin-right: 0.75rem;
+                        box-sizing: border-box;
+                        transition: all 0.3s ease;
+                    }
+                    .input-field:focus {
+                        outline: none;
+                        border-color: #63b3ed;
+                        box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.5);
+                    }
+                    .submit-button {
+                        padding: 0.85rem 2rem;
+                        background-color: #38a169;
+                        color: white;
+                        border: none;
+                        border-radius: 0.75rem;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease, transform 0.1s ease;
+                        white-space: nowrap;
+                        font-weight: 600;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    }
+                    .submit-button:hover {
+                        background-color: #2f855a;
+                        transform: translateY(-2px);
+                    }
+                    .submit-button:active {
+                        transform: translateY(0);
+                        box-shadow: none;
+                    }
+                    .disclaimer {
+                        margin-top: 2rem;
+                        font-size: 0.875rem;
+                        color: #ef4444;
+                        line-height: 1.5;
+                    }
+                    .error-message {
+                        color: #ef4444; /* Red for errors */
+                        font-weight: 600;
+                        margin-bottom: 1rem;
+                    }
+                    .back-button {
+                        padding: 0.75rem 1.5rem;
+                        background-color: #4299e1; /* Blue for back button */
+                        color: white;
+                        text-decoration: none;
+                        border-radius: 0.75rem;
+                        transition: background-color 0.3s ease, transform 0.1s ease;
+                        font-weight: 600;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        display: inline-block; /* To allow padding and margin */
+                        margin-top: 1.5rem;
+                    }
+                    .back-button:hover {
+                        background-color: #3182ce;
+                        transform: translateY(-2px);
+                    }
+                    .back-button:active {
+                        transform: translateY(0);
+                        box-shadow: none;
+                    }
+                    @media (max-width: 640px) {
+                        .input-group {
+                            flex-direction: column;
+                            align-items: stretch;
+                        }
+                        .input-field {
+                            width: 100%;
+                            margin-right: 0;
+                            margin-bottom: 0.75rem;
+                        }
+                        .submit-button {
+                            width: 100%;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1 class="text-4xl font-bold text-gray-800 mb-4">BlipNet Proxy</h1>
+                    <p class="error-message text-xl">Please provide a URL to proxy.</p>
+                    <form action="/proxy" method="GET" class="flex flex-col sm:flex-row items-center justify-center input-group">
+                        <input type="text" name="url" placeholder="Enter URL (e.g., https://example.com)"
+                               class="input-field">
+                        <button type="submit" class="submit-button">
+                            Go!
+                        </button>
+                    </form>
+                    <p class="disclaimer">
+                        <strong>Disclaimer:</strong> This is a basic proxy. It may not work for all websites, especially those with complex JavaScript or dynamic content. It does not provide anonymity or security features beyond basic content fetching. Use at your own risk.
+                    </p>
+                </div>
+            </body>
+            </html>
         `);
     }
 
@@ -100,16 +218,77 @@ app.get('/proxy', async (req, res) => {
     } catch (error) {
         console.error(`Proxy error for ${targetUrl}:`, error.message);
         res.status(500).send(`
-            <div style="font-family: 'Inter', sans-serif; text-align: center; margin-top: 50px; background-color: #f7fafc; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <h1 style="color: #e53e3e;">BlipNet Proxy Error</h1>
-                <p style="color: #718096;">Could not proxy the requested URL: <strong>${targetUrl}</strong></p>
-                <p style="color: #718096;">Error details: ${error.message}</p>
-                <p style="margin-top: 20px;">
-                    <a href="/" style="padding: 10px 20px; background-color: #4299e1; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s ease;">
-                        Go Back
-                    </a>
-                </p>
-            </div>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>BlipNet Proxy - Error</title>
+                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+                <script src="https://cdn.tailwindcss.com"></script>
+                <style>
+                    body {
+                        font-family: 'Inter', sans-serif;
+                        background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        min-height: 100vh;
+                        margin: 0;
+                        padding: 1rem;
+                        box-sizing: border-box;
+                    }
+                    .container {
+                        background-color: #ffffff;
+                        padding: 3rem 2.5rem;
+                        border-radius: 1.5rem;
+                        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+                        text-align: center;
+                        max-width: 90%;
+                        width: 550px;
+                        border: 1px solid #e2e8f0;
+                        animation: fadeIn 0.8s ease-out;
+                    }
+                    @keyframes fadeIn {
+                        from { opacity: 0; transform: translateY(-20px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                    .error-message {
+                        color: #ef4444; /* Red for errors */
+                        font-weight: 600;
+                        margin-bottom: 1rem;
+                    }
+                    .back-button {
+                        padding: 0.75rem 1.5rem;
+                        background-color: #4299e1; /* Blue for back button */
+                        color: white;
+                        text-decoration: none;
+                        border-radius: 0.75rem;
+                        transition: background-color 0.3s ease, transform 0.1s ease;
+                        font-weight: 600;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        display: inline-block; /* To allow padding and margin */
+                        margin-top: 1.5rem;
+                    }
+                    .back-button:hover {
+                        background-color: #3182ce;
+                        transform: translateY(-2px);
+                    }
+                    .back-button:active {
+                        transform: translateY(0);
+                        box-shadow: none;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1 class="text-4xl font-bold text-gray-800 mb-4">BlipNet Proxy Error</h1>
+                    <p class="error-message text-xl">Could not proxy the requested URL: <strong>${targetUrl}</strong></p>
+                    <p class="text-gray-600 mb-6">Error details: ${error.message}</p>
+                    <a href="/" class="back-button">Go Back to Home</a>
+                </div>
+            </body>
+            </html>
         `);
     }
 });
