@@ -1,0 +1,16 @@
+{
+  "name": "blipnet-proxy",
+  "version": "1.0.0",
+  "description": "A simple web proxy for BlipNet.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": "18.x" // Specify a Node.js version compatible with Render's free tier
+  }
+}
