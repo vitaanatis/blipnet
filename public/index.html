@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlipNet Proxy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Subtle gradient background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem; /* Add some padding for smaller screens */
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 3rem 2.5rem; /* Increased padding */
+            border-radius: 1.5rem; /* More rounded corners */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05); /* Stronger shadow */
+            text-align: center;
+            max-width: 90%;
+            width: 550px; /* Slightly wider container */
+            border: 1px solid #e2e8f0; /* Subtle border */
+            animation: fadeIn 0.8s ease-out; /* Simple fade-in animation */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .input-field {
+            flex-grow: 1; /* Allow input to grow */
+            padding: 0.85rem 1.25rem; /* Slightly more padding */
+            border: 1px solid #cbd5e0;
+            border-radius: 0.75rem; /* More rounded input */
+            margin-right: 0.75rem; /* More space to button */
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #63b3ed; /* Tailwind blue-400 */
+            box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.5); /* Blue glow on focus */
+        }
+        .submit-button {
+            padding: 0.85rem 2rem; /* More padding for a larger button */
+            background-color: #38a169; /* Tailwind green-600, a bit more vibrant */
+            color: white;
+            border: none;
+            border-radius: 0.75rem; /* More rounded button */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            white-space: nowrap;
+            font-weight: 600; /* Slightly bolder text */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Button shadow */
+        }
+        .submit-button:hover {
+            background-color: #2f855a; /* Darker green on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+        .submit-button:active {
+            transform: translateY(0); /* Press effect */
+            box-shadow: none;
+        }
+        .disclaimer {
+            margin-top: 2rem; /* More space above disclaimer */
+            font-size: 0.875rem;
+            color: #ef4444; /* Tailwind red-500 */
+            line-height: 1.5;
+        }
+        .title-icon {
+            font-size: 2.5rem; /* Larger icon */
+            margin-bottom: 0.75rem;
+            color: #4299e1; /* Blue icon color */
+        }
+        @media (max-width: 640px) { /* Adjusted breakpoint for sm:flex-row */
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .input-field {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 0.75rem; /* Space between input and button on small screens */
+            }
+            .submit-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-icon">🌐</div> <!-- A simple globe icon -->
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">BlipNet Proxy</h1>
+        <p class="text-gray-600 mb-8 text-lg">Your gateway to the web, unblocked.</p>
+        <form action="/proxy" method="GET" class="flex flex-col sm:flex-row items-center justify-center input-group">
+            <input type="text" name="url" placeholder="e.g., https://google.com" required
+                   class="input-field">
+            <button type="submit" class="submit-button">
+                Go!
+            </button>
+        </form>
+        <p class="disclaimer">
+            <strong>Disclaimer:</strong> This is a basic web proxy for educational and personal use. It does not provide full anonymity, security, or advanced features of commercial VPNs or proxies. It may not work for all websites, especially those with complex JavaScript. Use at your own risk.
+        </p>
+    </div>
+</body>
+</html>
